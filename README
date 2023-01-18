@@ -1,0 +1,41 @@
+Voicila Alexandra
+
+Comenzi:
+Register: 
+    - se citesc username-ul si parola si se trimit acestea sub forma
+    unui obiect JSON catre server. Pentru interpretarea erorilor, extrag din
+    raspunsul server-ului codul erorii care se afla la pozitia 9-11. Daca 
+    acest numar este mai mare de 400, afisez mesajul de eroare, altfel, cel
+    de succes.
+Login: 
+    - verific local valoarea cookie-ului. Daca acesta este nenul, inseamna ca 
+    utilizatorul este deja logat, asa ca nu mai este necesara alta verificare si
+    se afisaza mesajul de eroare. Altfel, asemanator ca la register, citesc
+    username-ul si parola, trimit cererea de tip POST catre server si, in caz
+    de succes, memorez cookie-ul si afisez mesajul de reusita.
+Logout:
+    - Verific cookie-ul, daca este NULL, inseamna ca utilizatorul nu este logat,
+    deci nu poate sa dea logout. Altfel, trimit cererea server-ului si eliberez 
+    campurile memorate specifice clientului.
+Enter-library:
+    - Verific ca utilizatorul sa fie logat, prin verificarea cookie-ul, apoi
+    procedez ca la login, memorand, de data asta, token-ul JWT.
+Get-books:
+    - Verific accesul la biblioteca prin existenta token-ului, trimit cererea
+    GET la server si, in caz de succes, extrag detaliile despre carti, delimitand
+    raspunsul dupa \r\n\r\n si le afisez.
+Get-book:
+    - Verific accesul la biblioteca, citesc id-ul cartii si verific, prin functia
+    is_number ca acesta sa contina doar cifre. Pentru crearea rutei de acces, 
+    concatenez ruta cu id-ul. Apoi procedez la fel ca la comanda anterioara.
+Add-book:
+    - Dupa verificarea accesului, citesc informatiile pentru noua carte adaugata
+    si verific ca numarul de pagini sa contina doar cifre. Creez obiectul JSON 
+    cu functiile din biblioteca parson si trimit cererea POST catre server, afisand
+    mesajul de eroare/succes.
+Delete-book:
+    - Similar ca la add-book, verific in plus ca id-ul sa fie valid.
+Exit:
+    - Eliberez memoria pentru token si cookie si opresc programul. 
+
+
